@@ -76,7 +76,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ className }) => {
         </DrawerWrapper>
 
         <LogoWrapper>
-          <Logo imageUrl={LogoImage} alt="shop logo" />
+          <Logo imageUrl='https://s4.aconvert.com/convert/p3r68-cdx67/a7jvh-4ty32.svg' alt="shop logo" />
         </LogoWrapper>
 
         <LanguageSwitcher />

@@ -55,7 +55,7 @@ const Header: React.FC<Props> = ({ className }) => {
     pathname === '/bakery';
   return (
     <HeaderWrapper className={className} id="layout-header">
-      <LeftMenu logo={LogoImage} />
+      <LeftMenu logo="https://s4.aconvert.com/convert/p3r68-cdx67/a7jvh-4ty32.svg" />
       {showSearch && <Search minimal={true} className="headerSearch" />}
       <RightMenu
         isAuthenticated={isAuthenticated}
