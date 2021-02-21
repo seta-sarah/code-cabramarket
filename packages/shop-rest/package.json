@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start"
-    "export": "npm run build && next export"
+    "export":  "npm run build && next export",
   },
   "dependencies": {
     "@redq/reuse-modal": "1.2.4-beta.0.63",
