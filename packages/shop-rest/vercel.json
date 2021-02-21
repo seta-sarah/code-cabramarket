@@ -2,7 +2,7 @@
   "build": {
     "env": {
       "NEXT_PUBLIC_STRIPE_PUBLIC_KEY": "put_your_stripe_public_key_here",
-      "NEXT_PUBLIC_REST_API_ENDPOINT": "code-654o4b6e3-vcsepis.vercel.app"
+      "NEXT_PUBLIC_REST_API_ENDPOINT": "https://code-cabramarket-a4f6x289v-kanghy123.vercel.app"
 
     }
   }
