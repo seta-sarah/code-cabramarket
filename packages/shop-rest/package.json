@@ -2,6 +2,7 @@
   "name": "@pick-bazar/shop-rest",
   "version": "5.0.0",
   "private": true,
+  "optionalDependencies": [],
   "scripts": {
     "dev": "next",
     "build": "next build",
