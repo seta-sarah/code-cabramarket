@@ -67,7 +67,23 @@ export const LeftMenu: React.FC<Props> = ({ logo }) => {
         onClick={() => setActiveMenu(CATEGORY_MENU_ITEMS[0])}
       />
 
-      <MainMenu>
+      <SelectedItem>
+        <span>
+          <Icon>
+            <CategoryIcon name={activeMenu?.icon} />
+          </Icon>
+          <span>
+            <FormattedMessage
+              id={activeMenu?.id}
+              defaultMessage={activeMenu?.defaultMessage}
+            />
+          </span>
+        </span>
+        {/* <Arrow>
+          <MenuDown />
+        </Arrow> */}
+      </SelectedItem>
+      {/* <MainMenu>
         <Popover
           className='right'
           handler={
@@ -90,7 +106,7 @@ export const LeftMenu: React.FC<Props> = ({ logo }) => {
           }
           content={<CategoryMenu onClick={setActiveMenu} />}
         />
-      </MainMenu>
+      </MainMenu> */}
     </LeftMenuBox>
   );
 };

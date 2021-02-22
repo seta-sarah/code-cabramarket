@@ -94,7 +94,7 @@ export const CATEGORY_MENU_ITEMS = [
   {
     id: 'nav.grocery-two',
     href: GROCERY_PAGE_TWO,
-    defaultMessage: 'Grocery Two',
+    defaultMessage: 'Tracking Order',
     icon: 'FruitsVegetable',
     dynamic: false,
   },
