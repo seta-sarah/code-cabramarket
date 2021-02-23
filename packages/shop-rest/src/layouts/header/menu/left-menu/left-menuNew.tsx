@@ -23,7 +23,7 @@ const CategoryIcon = ({ name }) => {
 
 const CategoryMenu = (props: any) => {
   const handleOnClick = () => {
-    Router.push('/grocery');
+    Router.push('/tracking-order');
   };
 
   return (
