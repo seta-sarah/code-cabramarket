@@ -46,6 +46,7 @@
   "dependencies": {
     "@aws-amplify/cli": "^4.44.0",
     "aws-amplify": "^3.3.20",
-    "vercel": "^21.2.3"
+    "vercel": "^21.2.3",
+    "yarn": "^1.22.10"
   }
 }
