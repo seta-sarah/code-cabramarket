@@ -9,6 +9,7 @@ import { LeftMenuNew } from './menu/left-menu/left-menuNew';
 import HeaderWrapper from './header.style';
 import LogoImage from 'assets/images/logo.svg';
 import UserImage from 'assets/images/user.jpg';
+import Logo from 'assets/images/banner/logo.png';
 import { isCategoryPage } from '../is-home-page';
 import Search from 'features/search/search';
 type Props = {
@@ -56,7 +57,7 @@ const Header: React.FC<Props> = ({ className }) => {
     pathname === '/bakery';
   return (
     <HeaderWrapper className={className} id="layout-header">
-      <LeftMenuNew logo="https://s4.aconvert.com/convert/p3r68-cdx67/a7jvh-4ty32.svg" />
+      <LeftMenuNew logo={Logo} />
       {showSearch && <Search minimal={true} className="headerSearch" />}
       <RightMenu
         isAuthenticated={isAuthenticated}

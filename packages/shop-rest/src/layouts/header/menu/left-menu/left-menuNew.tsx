@@ -1,11 +1,11 @@
-import React from 'react';
-import Router, { useRouter } from 'next/router';
-import { FormattedMessage } from 'react-intl';
-import Popover from 'components/popover/popover';
-import Logo from 'layouts/logo/logo';
-import { MenuDown } from 'assets/icons/MenuDown';
-import { CATEGORY_MENU_ITEMS } from 'site-settings/site-navigation';
-import * as categoryMenuIcons from 'assets/icons/category-menu-icons';
+import React from "react";
+import Router, { useRouter } from "next/router";
+import { FormattedMessage } from "react-intl";
+import Popover from "components/popover/popover";
+import Logo from "layouts/logo/logo";
+import { MenuDown } from "assets/icons/MenuDown";
+import { CATEGORY_MENU_ITEMS } from "site-settings/site-navigation";
+import * as categoryMenuIcons from "assets/icons/category-menu-icons";
 import {
   MainMenu,
   MenuItem,
@@ -14,7 +14,7 @@ import {
   Icon,
   Arrow,
   LeftMenuBox,
-} from './left-menu.style';
+} from "./left-menu.style";
 
 const CategoryIcon = ({ name }) => {
   const TagName = categoryMenuIcons[name];
@@ -23,19 +23,19 @@ const CategoryIcon = ({ name }) => {
 
 const CategoryMenu = (props: any) => {
   const handleOnClick = () => {
-    Router.push('/tracking-order');
+    Router.push("/tracking-order");
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <MenuItem  onClick={() => handleOnClick()}>
-          <IconWrapper>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <MenuItem onClick={() => handleOnClick()}>
+        <IconWrapper>
           <Icon>
             <CategoryIcon name={props.icon} />
           </Icon>
-            <p>Tracking Order</p>
-          </IconWrapper>
-        </MenuItem>
+          <p>Tracking Order</p>
+        </IconWrapper>
+      </MenuItem>
     </div>
   );
 };
@@ -57,11 +57,14 @@ export const LeftMenuNew: React.FC<Props> = ({ logo }) => {
     <LeftMenuBox>
       <Logo
         imageUrl={logo}
-        alt={'Shop Logo'}
+        alt={"Shop Logo"}
         onClick={() => setActiveMenu(CATEGORY_MENU_ITEMS[0])}
       />
 
-      <CategoryMenu icon={CATEGORY_MENU_ITEMS[0].icon} onClick={setActiveMenu} />
+      <CategoryMenu
+        icon={CATEGORY_MENU_ITEMS[0].icon}
+        onClick={setActiveMenu}
+      />
     </LeftMenuBox>
   );
 };
