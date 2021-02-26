@@ -17,6 +17,7 @@ export const PROFILE_PAGE = '/profile';
 export const YOUR_ORDER_PAGE = '/order';
 export const ORDER_RECEIVED_PAGE = '/order-received';
 export const OFFER_PAGE = '/offer';
+export const POLICY_PAGE = '/policy';
 export const HELP_PAGE = '/help';
 export const TERMS_AND_SERVICES_PAGE = '/terms';
 export const PRIVACY_POLICY_PAGE = '/privacy';
@@ -37,6 +38,11 @@ export const OFFER_MENU_ITEM = {
   id: 'nav.offer',
   defaultMessage: 'Offer',
   href: OFFER_PAGE,
+};
+export const POLICY_MENU_ITEM = {
+  id: 'nav.policy',
+  defaultMessage: 'Policy',
+  href: POLICY_PAGE,
 };
 export const ORDER_MENU_ITEM = {
   id: 'nav.order',
@@ -160,18 +166,13 @@ export const MOBILE_DRAWER_MENU = [
   HOME_MENU_ITEM,
   ...AUTHORIZED_MENU_ITEMS,
   HELP_MENU_ITEM,
-  OFFER_MENU_ITEM,
+  POLICY_MENU_ITEM,
 ];
 
 export const PROFILE_SIDEBAR_TOP_MENU = [ORDER_MENU_ITEM, HELP_MENU_ITEM];
 export const PROFILE_SIDEBAR_BOTTOM_MENU = [PROFILE_MENU_ITEM];
 
 export const LANGUAGE_MENU = [
-  {
-    id: 'ar',
-    defaultMessage: 'Arabic',
-    icon: 'SAFlag',
-  },
   {
     id: 'zh',
     defaultMessage: 'Chinese',
@@ -183,18 +184,8 @@ export const LANGUAGE_MENU = [
     icon: 'USFlag',
   },
   {
-    id: 'de',
-    defaultMessage: 'German',
-    icon: 'DEFlag',
-  },
-  {
-    id: 'he',
-    defaultMessage: 'Hebrew',
-    icon: 'ILFlag',
-  },
-  {
-    id: 'es',
-    defaultMessage: 'Spanish',
-    icon: 'ESFlag',
+    id: 'vn',
+    defaultMessage: 'Vietnam',
+    icon: 'USFlag',
   },
 ];
