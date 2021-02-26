@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import NavLink from 'components/nav-link/nav-link';
-import { OFFER_MENU_ITEM, HELP_MENU_ITEM } from 'site-settings/site-navigation';
+import { POLICY_MENU_ITEM, HELP_MENU_ITEM } from 'site-settings/site-navigation';
 import LanguageSwitcher from '../language-switcher/language-switcher';
 import { HelpIcon } from 'assets/icons/HelpIcon';
 import { RightMenuBox } from './right-menu.style';
@@ -22,11 +22,17 @@ export const RightMenu: React.FC<Props> = ({
 }) => {
   return (
     <RightMenuBox>
-      <NavLink
+      {/* <NavLink
         className="menu-item"
         href={OFFER_MENU_ITEM.href}
         label={OFFER_MENU_ITEM.defaultMessage}
         intlId={OFFER_MENU_ITEM.id}
+      /> */}
+      <NavLink
+        className="menu-item"
+        href={POLICY_MENU_ITEM.href}
+        label={POLICY_MENU_ITEM.defaultMessage}
+        intlId={POLICY_MENU_ITEM.id}
       />
       <NavLink
         className="menu-item"
