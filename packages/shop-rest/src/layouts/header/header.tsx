@@ -7,7 +7,7 @@ import { RightMenu } from './menu/right-menu/right-menu';
 import { LeftMenu } from './menu/left-menu/left-menu';
 import { LeftMenuNew } from './menu/left-menu/left-menuNew';
 import HeaderWrapper from './header.style';
-import LogoImage from 'assets/images/logo.svg';
+import LogoImage from 'assets/images/logoCabra.svg';
 import UserImage from 'assets/images/user.jpg';
 import { isCategoryPage } from '../is-home-page';
 import Search from 'features/search/search';
@@ -56,7 +56,7 @@ const Header: React.FC<Props> = ({ className }) => {
     pathname === '/bakery';
   return (
     <HeaderWrapper className={className} id="layout-header">
-      <LeftMenuNew logo="https://s4.aconvert.com/convert/p3r68-cdx67/a7jvh-4ty32.svg" />
+      <LeftMenuNew logo={LogoImage} />
       {showSearch && <Search minimal={true} className="headerSearch" />}
       <RightMenu
         isAuthenticated={isAuthenticated}

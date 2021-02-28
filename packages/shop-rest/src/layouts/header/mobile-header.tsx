@@ -12,7 +12,7 @@ import {
   SearchModalClose,
 } from './header.style';
 import Search from 'features/search/search';
-import LogoImage from 'assets/images/logo.svg';
+import LogoImage from 'assets/images/logoCabra.svg';
 
 import { SearchIcon } from 'assets/icons/SearchIcon';
 import { LongArrowLeft } from 'assets/icons/LongArrowLeft';
@@ -76,7 +76,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ className }) => {
         </DrawerWrapper>
 
         <LogoWrapper>
-          <Logo imageUrl='https://s4.aconvert.com/convert/p3r68-cdx67/a7jvh-4ty32.svg' alt="shop logo" />
+          <Logo imageUrl={LogoImage} alt="shop logo" />
         </LogoWrapper>
 
         <LanguageSwitcher />

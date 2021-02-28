@@ -61,7 +61,7 @@ export const LeftMenuNew: React.FC<Props> = ({ logo }) => {
         onClick={() => setActiveMenu(CATEGORY_MENU_ITEMS[0])}
       />
 
-      <CategoryMenu icon={CATEGORY_MENU_ITEMS[0].icon} onClick={setActiveMenu} />
+      <CategoryMenu icon={CATEGORY_MENU_ITEMS[3].icon} onClick={setActiveMenu} />
     </LeftMenuBox>
   );
 };
