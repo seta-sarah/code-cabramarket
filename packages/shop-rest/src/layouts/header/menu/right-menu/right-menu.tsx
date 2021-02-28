@@ -4,6 +4,7 @@ import NavLink from 'components/nav-link/nav-link';
 import { POLICY_MENU_ITEM, HELP_MENU_ITEM } from 'site-settings/site-navigation';
 import LanguageSwitcher from '../language-switcher/language-switcher';
 import { HelpIcon } from 'assets/icons/HelpIcon';
+import {AdobeIcon} from 'assets/icons/AdobeIcon';
 import { RightMenuBox } from './right-menu.style';
 const AuthMenu = dynamic(() => import('../auth-menu'), { ssr: false });
 
@@ -33,6 +34,8 @@ export const RightMenu: React.FC<Props> = ({
         href={POLICY_MENU_ITEM.href}
         label={POLICY_MENU_ITEM.defaultMessage}
         intlId={POLICY_MENU_ITEM.id}
+        iconClass="menu-icon"
+        icon={<AdobeIcon />}
       />
       <NavLink
         className="menu-item"
