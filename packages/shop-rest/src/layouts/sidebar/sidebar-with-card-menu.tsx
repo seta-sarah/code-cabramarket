@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardMenu } from 'components/card-menu';
 import { useRouter } from 'next/router';
 import ErrorMessage from 'components/error-message/error-message';
@@ -7,7 +7,10 @@ import Sticky from 'react-stickynode';
 import { Scrollbar } from 'components/scrollbar/scrollbar';
 import CategoryWalker from 'components/category-walker/category-walker';
 import useCategory from 'data/use-category';
-
+import { get } from 'utils/api/callApi';
+import { Loading, ButtonWrapper } from './sidebar.style';
+import { FormattedMessage } from 'react-intl';
+import { Button } from 'components/button/button';
 const Aside = styled.aside({
   width: '300px',
   position: 'fixed',
@@ -48,20 +51,42 @@ interface Props {
   type: string;
 }
 
+const per_page = 10;
+
 export const SidebarWithCardMenu = ({ type }: Props) => {
   const router = useRouter();
-  const { data, error } = useCategory({ type });
-
-  if (error) return <ErrorMessage message={error.message} />;
-  if (!data) return null;
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
   const { pathname, query } = router;
   const selectedQueries = query.category;
+
+  const initData = async () => {
+    const { data: dataRes } = await get(`/products/categories?offset=1&page=${page}&per_page=${per_page}`);
+    if (dataRes) setData(dataRes);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    initData();
+  }, [])
 
   const onCategoryClick = (slug: string) => {
     router.push({
       pathname,
       query: { ...query, category: slug },
     });
+  };
+
+  const handleLoadMore = async () => {
+    setLoading(true);
+    const newPage = page + 1;
+    const res = await get(`/products/categories?page=${newPage}&per_page=${per_page}`);
+    if (res.data) {
+      setData(data.concat(res.data));
+      setPage(newPage);
+    }
+    setLoading(false);
   };
 
   return (
@@ -87,26 +112,40 @@ export const SidebarWithCardMenu = ({ type }: Props) => {
       </MobileOnly>
 
       <DesktopOnly>
-        {/* <Sticky top={110}> */}
         <Aside>
           <Scrollbar
-            style={{ height: '100%', maxHeight: '100%' }}
+            style={{ maxHeight: 'calc(100% - 70px)' }}
             options={{
               scrollbars: {
                 visibility: 'hidden',
               },
             }}
           >
-            <CardMenuWrapper>
+            {!data || loading && (
+              <Loading />
+            )}
+            {data && data.length > 0 && <CardMenuWrapper>
               <CardMenu
                 data={data}
                 onClick={onCategoryClick}
                 active={selectedQueries}
               />
-            </CardMenuWrapper>
+            </CardMenuWrapper>}
           </Scrollbar>
+          <ButtonWrapper>
+            <Button
+              onClick={handleLoadMore}
+              loading={loading}
+              variant="secondary"
+              style={{
+                fontSize: 14,
+              }}
+              border="1px solid #f1f1f1"
+            >
+              <FormattedMessage id="loadMoreButton" defaultMessage="Load More" />
+            </Button>
+          </ButtonWrapper>
         </Aside>
-        {/* </Sticky> */}
       </DesktopOnly>
     </React.Fragment>
   );

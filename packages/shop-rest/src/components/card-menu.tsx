@@ -29,7 +29,7 @@ const Icon = ({ name, style }) => {
 export const CardMenu = ({ data, onClick, active, style }: Props) => {
   return (
     <>
-      {data.map(({ id, title, icon, slug }) => (
+      {data.map(({ id, name, icon, slug }) => (
         <CardBox
           key={id}
           onClick={() => onClick(slug)}
@@ -47,7 +47,7 @@ export const CardMenu = ({ data, onClick, active, style }: Props) => {
             <Icon name={icon} style={{ height: 40, width: 'auto' }} />
           </Box>
           <Text as='span' color='#212121' fontSize={14} fontWeight={600}>
-            {title}
+            {name}
           </Text>
         </CardBox>
       ))}

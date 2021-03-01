@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import {
@@ -16,6 +16,7 @@ import NoResultFound from 'components/no-result/no-result';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'components/button/button';
 import useProducts from 'data/use-products';
+import { get } from 'utils/api/callApi';
 const ErrorMessage = dynamic(() =>
   import('components/error-message/error-message')
 );
@@ -42,6 +43,7 @@ type ProductsProps = {
   loadMore?: boolean;
   type?: string;
 };
+const per_page = 20;
 export const Products: React.FC<ProductsProps> = ({
   deviceType,
   fetchLimit = 20,
@@ -49,42 +51,41 @@ export const Products: React.FC<ProductsProps> = ({
   type,
 }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const { data, error } = useProducts({
-    type,
-    text: router.query.text,
-    category: router.query.category,
-    offset: 0,
-    limit: fetchLimit,
-  });
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
+  const [page, setPage] = useState(1);
+  const { category } = router.query;
 
-  if (error) return <ErrorMessage message={error.message} />;
-  if (!data) {
-    return (
-      <LoaderWrapper>
-        <LoaderItem>
-          <Placeholder uniqueKey="1" />
-        </LoaderItem>
-        <LoaderItem>
-          <Placeholder uniqueKey="2" />
-        </LoaderItem>
-        <LoaderItem>
-          <Placeholder uniqueKey="3" />
-        </LoaderItem>
-      </LoaderWrapper>
-    );
+  const initData = async () => {
+    const { data: dataRes, error: errorRes } = await get(`/products?page=${page}&per_page=${per_page}`);
+    if (dataRes) setData(dataRes);
+    if (errorRes) setError(errorRes);
+    setLoading(false);
   }
+  useEffect(() => {
+    initData();
+  }, [])
 
-  if (data.length === 0) {
-    return <NoResultFound />;
-  }
+  useEffect(() => {
+    console.log(category)
+  }, [category])
+
   const handleLoadMore = async () => {
     setLoading(true);
-    // await fetchMore(Number(data.length), fetchLimit);
+    const newPage = page + 1;
+    const res = await get(`/products?page=${newPage}&per_page=${per_page}`);
+    if (res.data) {
+      setData(data.concat(res.data));
+      setPage(newPage);
+    }
+    if (res.error) setError(res.error);
     setLoading(false);
   };
 
   const renderCard = (productType, props) => {
+    props.image = props.images.length > 0 ? props.images[0].src : null;
+
     switch (productType) {
       case 'book':
         return (
@@ -109,7 +110,7 @@ export const Products: React.FC<ProductsProps> = ({
             currency={CURRENCY}
             image={props.image}
             price={props.price}
-            weight={props.unit}
+            weight={props.weight}
             data={props}
           />
         );
@@ -126,10 +127,10 @@ export const Products: React.FC<ProductsProps> = ({
       default:
         return (
           <GeneralCard
-            title={props.title}
+            title={props.name}
             description={props.description}
             image={props.image}
-            weight={props.unit}
+            weight={props.weight || "0"}
             currency={CURRENCY}
             price={props.price}
             salePrice={props.salePrice}
@@ -143,7 +144,21 @@ export const Products: React.FC<ProductsProps> = ({
   return (
     <>
       <ProductsRow>
-        {data.map((item: any, index: number) => (
+        {!data || loading && (
+          <LoaderWrapper>
+            <LoaderItem>
+              <Placeholder uniqueKey="1" />
+            </LoaderItem>
+            <LoaderItem>
+              <Placeholder uniqueKey="2" />
+            </LoaderItem>
+            <LoaderItem>
+              <Placeholder uniqueKey="3" />
+            </LoaderItem>
+          </LoaderWrapper>
+        )}
+        {data?.filter(item => item.categories.find(cate => !category || cate.slug === category))?.length === 0 && <NoResultFound />}
+        {data?.filter(item => item.categories.find(cate => !category || cate.slug === category)).map((item: any, index: number) => (
           <ProductsCol
             key={index}
             style={type === 'book' ? { paddingLeft: 0, paddingRight: 1 } : {}}
@@ -160,7 +175,7 @@ export const Products: React.FC<ProductsProps> = ({
           </ProductsCol>
         ))}
       </ProductsRow>
-      {loadMore && data?.hasMore && (
+      {(
         <ButtonWrapper>
           <Button
             onClick={handleLoadMore}
