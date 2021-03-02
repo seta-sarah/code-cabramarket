@@ -62,7 +62,7 @@ export const SidebarWithCardMenu = ({ type }: Props) => {
   const selectedQueries = query.category;
 
   const initData = async () => {
-    const { data: dataRes } = await get(`/products/categories?offset=1&page=${page}&per_page=${per_page}`);
+    const { data: dataRes } = await get(`/products/categories?page=1&per_page=100&include=[0,1243,1244,1211,1252,1254,1265,1266]&orderby=name`);
     if (dataRes) setData(dataRes);
     setLoading(false);
   }
@@ -132,7 +132,7 @@ export const SidebarWithCardMenu = ({ type }: Props) => {
               />
             </CardMenuWrapper>}
           </Scrollbar>
-          <ButtonWrapper>
+          {/*<ButtonWrapper>
             <Button
               onClick={handleLoadMore}
               loading={loading}
@@ -144,7 +144,7 @@ export const SidebarWithCardMenu = ({ type }: Props) => {
             >
               <FormattedMessage id="loadMoreButton" defaultMessage="Load More" />
             </Button>
-          </ButtonWrapper>
+          </ButtonWrapper>*/}
         </Aside>
       </DesktopOnly>
     </React.Fragment>
